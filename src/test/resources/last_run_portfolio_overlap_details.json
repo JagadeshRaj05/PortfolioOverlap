@@ -1,0 +1,17 @@
+[
+  {
+    "sourceFundName": "MIRAE_ASSET_EMERGING_BLUECHIP",
+    "targetFundName": "UTI_NIFTY_INDEX",
+    "overlapPercentage": "65.52"
+  },
+  {
+    "sourceFundName": "MIRAE_ASSET_EMERGING_BLUECHIP",
+    "targetFundName": "AXIS_BLUECHIP",
+    "overlapPercentage": "39.13"
+  },
+  {
+    "sourceFundName": "MIRAE_ASSET_EMERGING_BLUECHIP",
+    "targetFundName": "ICICI_PRU_BLUECHIP",
+    "overlapPercentage": "38.10"
+  }
+]

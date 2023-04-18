@@ -1,0 +1,82 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.10'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id "com.diffplug.gradle.spotless" version "4.5.1"
+	id 'jacoco'
+}
+
+group = 'com.fabric'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+spotless {
+	java {
+		googleJavaFormat()
+	}
+}
+
+jacoco {
+	toolVersion = "0.8.7"
+}
+
+def jacocoFileExclusions = ["com/fabric/portfoliooverlap/PortfolioOverlapApplication**"]
+
+jacocoTestReport {
+	reports {
+		html.enabled(true)
+	}
+	dependsOn test
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: jacocoFileExclusions)}))
+	}
+	finalizedBy jacocoTestCoverageVerification
+}
+
+jacocoTestCoverageVerification {
+	violationRules{
+		rule {
+			enabled = true
+			limit {
+				minimum = 0.9
+			}
+		}
+	}
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: jacocoFileExclusions)}))
+	}
+}
+
+test {
+	useJUnitPlatform()
+	finalizedBy jacocoTestReport
+}
+
+compileJava.dependsOn spotlessApply
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+    compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.projectlombok:lombok:1.18.22'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'net.javacrumbs.json-unit:json-unit:2.36.1'
+}
+
+//tasks.named('test') {
+//	useJUnitPlatform()
+//}
