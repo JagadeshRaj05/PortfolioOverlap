@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 
 import com.fabric.portfoliooverlap.exception.InvalidCommandException;
 import com.fabric.portfoliooverlap.model.FundDetails;
-import com.fabric.portfoliooverlap.model.Funds;
+import com.fabric.portfoliooverlap.model.Fund;
 import com.fabric.portfoliooverlap.service.commands.CalculatePortfolioOverlapCommand;
 import com.fabric.portfoliooverlap.service.commands.CreateUserPortFolioCommand;
 import com.fabric.portfoliooverlap.util.FileUtils;
@@ -53,7 +53,7 @@ class PortfolioOverlapServiceTest {
     // Prepare
     when(fundService.fetchFundDetails())
         .thenReturn(
-            new FundDetails(singletonList(new Funds("AXIS_BLUECHIP", singletonList("TCS")))));
+            new FundDetails(singletonList(new Fund("AXIS_BLUECHIP", singletonList("TCS")))));
 
     try (MockedStatic<FileUtils> fileUtilsMock = Mockito.mockStatic(FileUtils.class)) {
       fileUtilsMock
@@ -75,7 +75,7 @@ class PortfolioOverlapServiceTest {
     // Prepare
     when(fundService.fetchFundDetails())
         .thenReturn(
-            new FundDetails(singletonList(new Funds("AXIS_BLUECHIP", singletonList("TCS")))));
+            new FundDetails(singletonList(new Fund("AXIS_BLUECHIP", singletonList("TCS")))));
     when(commandFactory.getCommand(CreateUserPortFolioCommand.class))
         .thenThrow(InvalidCommandException.class);
     when(commandFactory.getCommand(CalculatePortfolioOverlapCommand.class))
@@ -108,7 +108,7 @@ class PortfolioOverlapServiceTest {
     // Prepare
     when(fundService.fetchFundDetails())
         .thenReturn(
-            new FundDetails(singletonList(new Funds("AXIS_BLUECHIP", singletonList("TCS")))));
+            new FundDetails(singletonList(new Fund("AXIS_BLUECHIP", singletonList("TCS")))));
     when(commandFactory.getCommand(CreateUserPortFolioCommand.class))
         .thenThrow(InvalidCommandException.class);
     when(commandFactory.getCommand(CalculatePortfolioOverlapCommand.class))

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.fabric.portfoliooverlap.exception.InvalidCommandException;
 import com.fabric.portfoliooverlap.model.CommandExecutionContext;
 import com.fabric.portfoliooverlap.model.CommandExecutionContextHolder;
-import com.fabric.portfoliooverlap.model.Funds;
+import com.fabric.portfoliooverlap.model.Fund;
 import com.fabric.portfoliooverlap.utility.DataFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.List;
@@ -39,8 +39,8 @@ class CreateUserPortFolioCommandTest {
   @Test
   void shouldCreateUserPortFolioFromConfiguredAvailableFunds() {
     // Prepare
-    List<Funds> availableFunds =
-        DataFactory.getResource("available_funds.json", new TypeReference<List<Funds>>() {});
+    List<Fund> availableFunds =
+        DataFactory.getResource("available_funds.json", new TypeReference<List<Fund>>() {});
     CommandExecutionContextHolder.setCommandExecutionContext(
         new CommandExecutionContext(availableFunds));
 
@@ -52,9 +52,9 @@ class CreateUserPortFolioCommandTest {
     CommandExecutionContext commandExecutionContext =
         CommandExecutionContextHolder.getCommandExecutionContext();
 
-    List<Funds> actualUserFunds = commandExecutionContext.getUserFunds();
-    List<Funds> expectedUserFunds =
-        DataFactory.getResource("user_funds.json", new TypeReference<List<Funds>>() {});
+    List<Fund> actualUserFunds = commandExecutionContext.getUserFunds();
+    List<Fund> expectedUserFunds =
+        DataFactory.getResource("user_funds.json", new TypeReference<List<Fund>>() {});
     assertJsonEquals(expectedUserFunds, actualUserFunds, JsonAssert.when(IGNORING_ARRAY_ORDER));
   }
 
@@ -71,16 +71,16 @@ class CreateUserPortFolioCommandTest {
     CommandExecutionContext commandExecutionContext =
         CommandExecutionContextHolder.getCommandExecutionContext();
 
-    List<Funds> actualUserFunds = commandExecutionContext.getUserFunds();
-    DataFactory.getResource("user_funds1.json", new TypeReference<List<Funds>>() {});
+    List<Fund> actualUserFunds = commandExecutionContext.getUserFunds();
+    DataFactory.getResource("user_funds1.json", new TypeReference<List<Fund>>() {});
     assertTrue(actualUserFunds.isEmpty());
   }
 
   @Test
   void shouldIgnoreInvalidFundsWhileCreatingUserPortFolio() {
     // Prepare
-    List<Funds> availableFunds =
-        DataFactory.getResource("available_funds.json", new TypeReference<List<Funds>>() {});
+    List<Fund> availableFunds =
+        DataFactory.getResource("available_funds.json", new TypeReference<List<Fund>>() {});
     CommandExecutionContextHolder.setCommandExecutionContext(
         new CommandExecutionContext(availableFunds));
 
@@ -92,9 +92,9 @@ class CreateUserPortFolioCommandTest {
     CommandExecutionContext commandExecutionContext =
         CommandExecutionContextHolder.getCommandExecutionContext();
 
-    List<Funds> actualUserFunds = commandExecutionContext.getUserFunds();
-    List<Funds> expectedUserFunds =
-        DataFactory.getResource("user_funds1.json", new TypeReference<List<Funds>>() {});
+    List<Fund> actualUserFunds = commandExecutionContext.getUserFunds();
+    List<Fund> expectedUserFunds =
+        DataFactory.getResource("user_funds1.json", new TypeReference<List<Fund>>() {});
     assertJsonEquals(expectedUserFunds, actualUserFunds, JsonAssert.when(IGNORING_ARRAY_ORDER));
   }
 }

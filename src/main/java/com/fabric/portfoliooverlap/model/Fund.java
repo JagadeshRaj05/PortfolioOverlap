@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class Funds {
+public class Fund {
 
   private String name;
   private List<String> stocks;

@@ -8,7 +8,7 @@ import com.fabric.portfoliooverlap.exception.FundNotFoundException;
 import com.fabric.portfoliooverlap.exception.InvalidCommandException;
 import com.fabric.portfoliooverlap.model.CommandExecutionContext;
 import com.fabric.portfoliooverlap.model.CommandExecutionContextHolder;
-import com.fabric.portfoliooverlap.model.Funds;
+import com.fabric.portfoliooverlap.model.Fund;
 import com.fabric.portfoliooverlap.utility.DataFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.List;
@@ -55,8 +55,8 @@ class AddStockInFundCommandTest {
   @Test
   void shouldThrowFundNotFoundExceptionIfGivenFundNameIsInvalid() {
     // Prepare
-    List<Funds> availableFunds =
-        DataFactory.getResource("available_funds.json", new TypeReference<List<Funds>>() {});
+    List<Fund> availableFunds =
+        DataFactory.getResource("available_funds.json", new TypeReference<List<Fund>>() {});
     CommandExecutionContext commandExecutionContext = new CommandExecutionContext(availableFunds);
     CommandExecutionContextHolder.setCommandExecutionContext(commandExecutionContext);
 
@@ -71,8 +71,8 @@ class AddStockInFundCommandTest {
   @Test
   void shouldAddSingleWordStockToFundProperly() {
     // Prepare
-    List<Funds> availableFunds =
-        DataFactory.getResource("available_funds.json", new TypeReference<List<Funds>>() {});
+    List<Fund> availableFunds =
+        DataFactory.getResource("available_funds.json", new TypeReference<List<Fund>>() {});
     CommandExecutionContext commandExecutionContext = new CommandExecutionContext(availableFunds);
     CommandExecutionContextHolder.setCommandExecutionContext(commandExecutionContext);
 
@@ -81,10 +81,10 @@ class AddStockInFundCommandTest {
     addStockInFundCommand.execute(command);
 
     // Assert
-    List<Funds> actualAvailableFunds = commandExecutionContext.getAvailableFunds();
-    List<Funds> expectedAvailableFunds =
+    List<Fund> actualAvailableFunds = commandExecutionContext.getAvailableFunds();
+    List<Fund> expectedAvailableFunds =
         DataFactory.getResource(
-            "available_funds_added_single_word_stock.json", new TypeReference<List<Funds>>() {});
+            "available_funds_added_single_word_stock.json", new TypeReference<List<Fund>>() {});
     assertJsonEquals(
         expectedAvailableFunds, actualAvailableFunds, JsonAssert.when(IGNORING_ARRAY_ORDER));
   }
@@ -92,8 +92,8 @@ class AddStockInFundCommandTest {
   @Test
   void shouldAddMultiwordStockToFundProperly() {
     // Prepare
-    List<Funds> availableFunds =
-        DataFactory.getResource("available_funds.json", new TypeReference<List<Funds>>() {});
+    List<Fund> availableFunds =
+        DataFactory.getResource("available_funds.json", new TypeReference<List<Fund>>() {});
     CommandExecutionContext commandExecutionContext = new CommandExecutionContext(availableFunds);
     CommandExecutionContextHolder.setCommandExecutionContext(commandExecutionContext);
 
@@ -102,10 +102,10 @@ class AddStockInFundCommandTest {
     addStockInFundCommand.execute(command);
 
     // Assert
-    List<Funds> actualAvailableFunds = commandExecutionContext.getAvailableFunds();
-    List<Funds> expectedAvailableFunds =
+    List<Fund> actualAvailableFunds = commandExecutionContext.getAvailableFunds();
+    List<Fund> expectedAvailableFunds =
         DataFactory.getResource(
-            "available_funds_added_multi_word_stock.json", new TypeReference<List<Funds>>() {});
+            "available_funds_added_multi_word_stock.json", new TypeReference<List<Fund>>() {});
     assertJsonEquals(
         expectedAvailableFunds, actualAvailableFunds, JsonAssert.when(IGNORING_ARRAY_ORDER));
   }

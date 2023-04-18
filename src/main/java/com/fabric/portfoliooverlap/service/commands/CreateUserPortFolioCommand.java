@@ -5,7 +5,7 @@ import static com.fabric.portfoliooverlap.model.CommandType.CURRENT_PORTFOLIO;
 import com.fabric.portfoliooverlap.exception.InvalidCommandException;
 import com.fabric.portfoliooverlap.model.CommandExecutionContext;
 import com.fabric.portfoliooverlap.model.CommandExecutionContextHolder;
-import com.fabric.portfoliooverlap.model.Funds;
+import com.fabric.portfoliooverlap.model.Fund;
 import com.fabric.portfoliooverlap.service.Command;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +37,7 @@ public class CreateUserPortFolioCommand implements Command {
         CommandExecutionContextHolder.getCommandExecutionContext();
 
     Set<String> userFundsToCreatePortFolio = getUserFundsToCreatePortFolio(commandOperation);
-    List<Funds> userFunds =
+    List<Fund> userFunds =
         commandExecutionContext.safeGetAvailableFunds().stream()
             .filter(funds -> userFundsToCreatePortFolio.contains(funds.getName()))
             .collect(Collectors.toList());

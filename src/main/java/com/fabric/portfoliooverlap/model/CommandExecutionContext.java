@@ -9,15 +9,15 @@ import lombok.NoArgsConstructor;
 @Getter
 public class CommandExecutionContext {
 
-  private List<Funds> availableFunds;
-  private List<Funds> userFunds;
+  private List<Fund> availableFunds;
+  private List<Fund> userFunds;
   private List<PortfolioOverlapDetails> lastRunPortfolioOverlapDetails;
 
-  public CommandExecutionContext(List<Funds> availableFunds) {
+  public CommandExecutionContext(List<Fund> availableFunds) {
     this.availableFunds = availableFunds;
   }
 
-  public void updateUserFunds(List<Funds> userFunds) {
+  public void updateUserFunds(List<Fund> userFunds) {
     this.userFunds = userFunds;
   }
 
@@ -26,7 +26,7 @@ public class CommandExecutionContext {
     this.lastRunPortfolioOverlapDetails = lastRunPortfolioOverlapDetails;
   }
 
-  public List<Funds> safeGetAvailableFunds() {
+  public List<Fund> safeGetAvailableFunds() {
     return this.availableFunds != null ? this.availableFunds : Collections.emptyList();
   }
 }

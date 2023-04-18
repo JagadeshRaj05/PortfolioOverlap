@@ -4,7 +4,7 @@ import com.fabric.portfoliooverlap.exception.FundNotFoundException;
 import com.fabric.portfoliooverlap.exception.InvalidCommandException;
 import com.fabric.portfoliooverlap.model.CommandExecutionContext;
 import com.fabric.portfoliooverlap.model.CommandExecutionContextHolder;
-import com.fabric.portfoliooverlap.model.Funds;
+import com.fabric.portfoliooverlap.model.Fund;
 import com.fabric.portfoliooverlap.model.PortfolioOverlapDetails;
 import com.fabric.portfoliooverlap.service.Command;
 import java.math.RoundingMode;
@@ -34,13 +34,13 @@ public class CalculatePortfolioOverlapCommand implements Command {
     }
 
     String fundName = commandSegments[1];
-    Funds fundToCalculateOverlap =
+    Fund fundToCalculateOverlap =
         commandExecutionContext.safeGetAvailableFunds().stream()
             .filter(funds -> funds.getName().equals(fundName))
             .findFirst()
             .orElseThrow(() -> new FundNotFoundException("Invalid fundName to calculate overlap"));
 
-    List<Funds> userFunds = commandExecutionContext.getUserFunds();
+    List<Fund> userFunds = commandExecutionContext.getUserFunds();
     if (userFunds == null || userFunds.isEmpty()) {
       throw new FundNotFoundException(
           "At least single user fund is expected here. Please run create portfolio command");
@@ -56,7 +56,7 @@ public class CalculatePortfolioOverlapCommand implements Command {
     commandExecutionContext.updateLastRunPortfolioOverlapDetails(lastRunPortfolioOverlapDetails);
   }
 
-  private PortfolioOverlapDetails calculateOverlap(Funds source, Funds target) {
+  private PortfolioOverlapDetails calculateOverlap(Fund source, Fund target) {
     HashSet<String> sourceStocks = new HashSet<>(source.getStocks());
     sourceStocks.retainAll(target.getStocks());
 

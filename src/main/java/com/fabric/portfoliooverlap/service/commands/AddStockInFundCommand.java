@@ -4,7 +4,7 @@ import com.fabric.portfoliooverlap.exception.FundNotFoundException;
 import com.fabric.portfoliooverlap.exception.InvalidCommandException;
 import com.fabric.portfoliooverlap.model.CommandExecutionContext;
 import com.fabric.portfoliooverlap.model.CommandExecutionContextHolder;
-import com.fabric.portfoliooverlap.model.Funds;
+import com.fabric.portfoliooverlap.model.Fund;
 import com.fabric.portfoliooverlap.service.Command;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +34,7 @@ public class AddStockInFundCommand implements Command {
 
     /* Problem statement has not mentioned anything about adding stock to user funds
      * So Assuming that operations happens at fund level */
-    Funds fundToAddStock =
+    Fund fundToAddStock =
         commandExecutionContext.safeGetAvailableFunds().stream()
             .filter(funds -> funds.getName().equals(fundName))
             .findFirst()

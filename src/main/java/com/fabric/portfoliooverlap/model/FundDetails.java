@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class FundDetails {
 
-  private List<Funds> funds;
+  private List<Fund> funds;
 
   @Override
   public String toString() {

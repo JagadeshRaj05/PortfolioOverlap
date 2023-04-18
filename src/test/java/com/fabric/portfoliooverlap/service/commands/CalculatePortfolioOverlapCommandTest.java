@@ -8,7 +8,7 @@ import com.fabric.portfoliooverlap.exception.FundNotFoundException;
 import com.fabric.portfoliooverlap.exception.InvalidCommandException;
 import com.fabric.portfoliooverlap.model.CommandExecutionContext;
 import com.fabric.portfoliooverlap.model.CommandExecutionContextHolder;
-import com.fabric.portfoliooverlap.model.Funds;
+import com.fabric.portfoliooverlap.model.Fund;
 import com.fabric.portfoliooverlap.model.PortfolioOverlapDetails;
 import com.fabric.portfoliooverlap.utility.DataFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -52,8 +52,8 @@ class CalculatePortfolioOverlapCommandTest {
   @Test
   void shouldThrowFundNotFoundExceptionWhenGivenFundIsNotFound() {
     // Prepare
-    List<Funds> availableFunds =
-        DataFactory.getResource("available_funds.json", new TypeReference<List<Funds>>() {});
+    List<Fund> availableFunds =
+        DataFactory.getResource("available_funds.json", new TypeReference<List<Fund>>() {});
     CommandExecutionContextHolder.setCommandExecutionContext(
         new CommandExecutionContext(availableFunds));
 
@@ -68,8 +68,8 @@ class CalculatePortfolioOverlapCommandTest {
   @Test
   void shouldThrowFundNotFoundExceptionWhenUserFundIsNotConfigured() {
     // Prepare
-    List<Funds> availableFunds =
-        DataFactory.getResource("available_funds.json", new TypeReference<List<Funds>>() {});
+    List<Fund> availableFunds =
+        DataFactory.getResource("available_funds.json", new TypeReference<List<Fund>>() {});
     CommandExecutionContextHolder.setCommandExecutionContext(
         new CommandExecutionContext(availableFunds));
 
@@ -86,10 +86,10 @@ class CalculatePortfolioOverlapCommandTest {
   @Test
   void shouldCalculatePortfolioOverlapAndUpdateInCommandExecutionContext() {
     // Prepare
-    List<Funds> availableFunds =
-        DataFactory.getResource("available_funds.json", new TypeReference<List<Funds>>() {});
-    List<Funds> userFunds =
-        DataFactory.getResource("user_funds.json", new TypeReference<List<Funds>>() {});
+    List<Fund> availableFunds =
+        DataFactory.getResource("available_funds.json", new TypeReference<List<Fund>>() {});
+    List<Fund> userFunds =
+        DataFactory.getResource("user_funds.json", new TypeReference<List<Fund>>() {});
 
     CommandExecutionContextHolder.setCommandExecutionContext(
         new CommandExecutionContext(availableFunds));
