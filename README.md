@@ -22,7 +22,7 @@ Application is to run series of commands related to user portfolio.
 ## Accomplishments
 
 - Given problem statement
-- 90+% code coverage
+- 97% code coverage
 
 ## Extras
 
