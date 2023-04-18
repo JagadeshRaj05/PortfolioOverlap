@@ -32,7 +32,7 @@ class CreateUserPortFolioCommandTest {
         assertThrows(
             InvalidCommandException.class, () -> createUserPortFolioCommand.execute(command));
     assertEquals(
-        "Given command operation - ADD_STOCK AXIS_BLUECHIP is invalid",
+        "Given command operation - CURRENT_PORTFOLIO is invalid",
         invalidCommandException.getMessage());
   }
 

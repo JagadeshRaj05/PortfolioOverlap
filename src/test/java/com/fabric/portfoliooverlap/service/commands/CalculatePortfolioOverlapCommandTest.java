@@ -32,7 +32,7 @@ class CalculatePortfolioOverlapCommandTest {
         assertThrows(
             InvalidCommandException.class, () -> calculatePortfolioOverlapCommand.execute(command));
     assertEquals(
-        "Given command operation - ADD_STOCK AXIS_BLUECHIP is invalid",
+        "Given command operation - CALCULATE_OVERLAP is invalid",
         invalidCommandException.getMessage());
   }
 
