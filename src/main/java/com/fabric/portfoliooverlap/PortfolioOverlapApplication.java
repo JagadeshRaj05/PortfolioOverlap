@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PortfolioOverlapApplication {
 
   public static void main(String[] args) {
-    SpringApplication portfolioApplication =
-        new SpringApplication(PortfolioOverlapApplication.class);
-    portfolioApplication.run(args);
+    SpringApplication.run(PortfolioOverlapApplication.class, args);
   }
 }

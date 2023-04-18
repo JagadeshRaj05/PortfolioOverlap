@@ -16,11 +16,7 @@ public class PortfolioCommandRunner implements CommandLineRunner {
   @Override
   public void run(String... args) {
     log.info("******* Initiating PortfolioOverlap application *******");
-    log.info(
-        "If you want to use file from your system directory give absolute path eg: /Users/jagadesh.raj/workspace/portfoliooverlap/src/main/resources/input1.txt");
-    log.info(
-        "Else if you want to use existing inputs in resource folder give file name alone eg: input1.txt or input2.txt");
-    log.info("For more information, please refer README.md");
+    log.info("For more information on how to run part, please refer README.md");
 
     if (args.length > 0) {
       boolean isInputsNotFromClassPath = Paths.get(args[0]).isAbsolute();

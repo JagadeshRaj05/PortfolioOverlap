@@ -32,7 +32,7 @@ public class AddStockInFundCommand implements Command {
     CommandExecutionContext commandExecutionContext =
         CommandExecutionContextHolder.getCommandExecutionContext();
 
-    /* Problem statement has not mentioned anything about adding stock to user funds alone
+    /* Problem statement has not mentioned anything about adding stock to user funds
      * So Assuming that operations happens at fund level */
     Funds fundToAddStock =
         commandExecutionContext.safeGetAvailableFunds().stream()

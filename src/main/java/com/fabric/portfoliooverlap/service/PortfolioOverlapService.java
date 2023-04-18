@@ -18,8 +18,8 @@ public class PortfolioOverlapService {
   public void processSeriesOfCommandsFromFile(String inputPath, boolean isClassPathFile) {
     FundDetails fundDetails = fundService.fetchFundDetails();
 
-    // Since there is no requirement to do DB actions, using thread local to share context between
-    // commands
+    /* Since there is no requirement to do DB actions,
+     * using thread local to share context between commands */
     CommandExecutionContextHolder.setCommandExecutionContext(
         new CommandExecutionContext(fundDetails.getFunds()));
     FileUtils.readContentAsLines(inputPath, isClassPathFile).forEach(this::safeExecuteCommand);
@@ -32,7 +32,7 @@ public class PortfolioOverlapService {
       Command command = commandFactory.getCommand(commandType.getGetCommandClassType());
       command.execute(commandOperation);
     } catch (Exception ex) {
-      // To replicate the output as such used system out instead of logger
+      // To replicate the output as mentioned in codu.ai used system out instead of logger
       System.out.println(ex.getMessage());
     }
   }

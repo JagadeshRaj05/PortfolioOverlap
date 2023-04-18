@@ -20,12 +20,12 @@ import org.springframework.stereotype.Service;
 public class CalculatePortfolioOverlapCommand implements Command {
 
   public static final int MINIMUM_COMMAND_SEGMENTS = 2;
+  public static final String ROUNDING_PATTERN = "0.00";
 
   @Override
   public void execute(String commandOperation) {
     CommandExecutionContext commandExecutionContext =
         CommandExecutionContextHolder.getCommandExecutionContext();
-
     String[] commandSegments = commandOperation.split("\\s");
 
     if (commandSegments.length < MINIMUM_COMMAND_SEGMENTS) {
@@ -69,7 +69,7 @@ public class CalculatePortfolioOverlapCommand implements Command {
   }
 
   private String getRoundedOverlapPercentage(double overlapPercentage) {
-    DecimalFormat decimalFormat = new DecimalFormat("0.00");
+    DecimalFormat decimalFormat = new DecimalFormat(ROUNDING_PATTERN);
     decimalFormat.setRoundingMode(RoundingMode.HALF_UP);
     return decimalFormat.format(overlapPercentage);
   }
