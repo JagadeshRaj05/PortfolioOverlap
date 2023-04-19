@@ -60,7 +60,8 @@ class CreateUserPortFolioCommandTest {
 
     List<Fund> actualUserFunds = commandExecutionContext.getUserFunds();
     List<Fund> expectedUserFunds =
-        DataFactory.getResource("user_funds_axis_icici_uti.json", new TypeReference<List<Fund>>() {});
+        DataFactory.getResource(
+            "user_funds_axis_icici_uti.json", new TypeReference<List<Fund>>() {});
     assertJsonEquals(expectedUserFunds, actualUserFunds, JsonAssert.when(IGNORING_ARRAY_ORDER));
   }
 
@@ -99,7 +100,8 @@ class CreateUserPortFolioCommandTest {
 
     List<Fund> actualUserFunds = commandExecutionContext.getUserFunds();
     List<Fund> expectedUserFunds =
-        DataFactory.getResource("user_funds_axis_bluechip_uti_index.json", new TypeReference<List<Fund>>() {});
+        DataFactory.getResource(
+            "user_funds_axis_bluechip_uti_index.json", new TypeReference<List<Fund>>() {});
     assertJsonEquals(expectedUserFunds, actualUserFunds, JsonAssert.when(IGNORING_ARRAY_ORDER));
   }
 }

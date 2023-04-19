@@ -95,7 +95,8 @@ class CalculatePortfolioOverlapCommandTest {
     List<Fund> availableFunds =
         DataFactory.getResource("available_funds.json", new TypeReference<List<Fund>>() {});
     List<Fund> userFunds =
-        DataFactory.getResource("user_funds_axis_icici_uti.json", new TypeReference<List<Fund>>() {});
+        DataFactory.getResource(
+            "user_funds_axis_icici_uti.json", new TypeReference<List<Fund>>() {});
 
     CommandExecutionContextHolder.setCommandExecutionContext(
         new CommandExecutionContext(availableFunds));
