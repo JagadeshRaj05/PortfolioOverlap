@@ -31,11 +31,11 @@ class FileUtilsTest {
   @Test
   void shouldReadContentsAsLinesFromClassPathFile() {
     // Act
-    List<String> actualLines = FileUtils.readContentAsLines("input/sample.txt", true);
+    List<String> actualLines = FileUtils.readContentAsLines("sample.txt", true);
 
     // Assert
     List<String> expectedLines =
-        DataFactory.getResource("expected/sample.json", new TypeReference<List<String>>() {});
+        DataFactory.getResource("sample.json", new TypeReference<List<String>>() {});
     assertEquals(expectedLines, actualLines);
   }
 
@@ -43,15 +43,13 @@ class FileUtilsTest {
   void shouldReadContentsAsLinesFromSystemFile() {
     // Prepare
     List<String> expectedLines =
-        DataFactory.getResource("expected/sample.json", new TypeReference<List<String>>() {});
+        DataFactory.getResource("sample.json", new TypeReference<List<String>>() {});
 
     try (MockedStatic<Files> filesMock = Mockito.mockStatic(Files.class)) {
-      filesMock
-          .when(() -> Files.readAllLines(Paths.get("input/sample.txt")))
-          .thenReturn(expectedLines);
+      filesMock.when(() -> Files.readAllLines(Paths.get("sample.txt"))).thenReturn(expectedLines);
 
       // Act
-      List<String> actualLines = FileUtils.readContentAsLines("input/sample.txt", false);
+      List<String> actualLines = FileUtils.readContentAsLines("sample.txt", false);
 
       // Assert
       assertEquals(expectedLines, actualLines);
@@ -73,10 +71,10 @@ class FileUtilsTest {
   @Test
   void shouldReadContentAsJsonFromClassPathFile() {
     // Act
-    JsonNode actualObject = FileUtils.readContentAsJson("input/sample.json", JsonNode.class, true);
+    JsonNode actualObject = FileUtils.readContentAsJson("sample.json", JsonNode.class, true);
 
     // Assert
-    JsonNode expectedObject = DataFactory.getResource("expected/sample.json", JsonNode.class);
+    JsonNode expectedObject = DataFactory.getResource("sample.json", JsonNode.class);
     assertEquals(expectedObject, actualObject);
   }
 }

@@ -7,6 +7,7 @@ import com.fabric.portfoliooverlap.model.CommandExecutionContext;
 import com.fabric.portfoliooverlap.model.CommandExecutionContextHolder;
 import com.fabric.portfoliooverlap.model.PortfolioOverlapDetails;
 import java.util.Collections;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,6 +17,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class PrintOverlapPercentageCommandTest {
 
   @InjectMocks private PrintOverlapPercentageCommand printOverlapPercentageCommand;
+
+  @AfterEach
+  void clear() {
+    CommandExecutionContextHolder.clearCommandExecutionContext();
+  }
 
   @Test
   void shouldThrowExceptionIfPortfolioOverlapDetailIsNull() {

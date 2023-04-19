@@ -14,6 +14,7 @@ import com.fabric.portfoliooverlap.utility.DataFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.List;
 import net.javacrumbs.jsonunit.JsonAssert;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,6 +24,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class CalculatePortfolioOverlapCommandTest {
 
   @InjectMocks private CalculatePortfolioOverlapCommand calculatePortfolioOverlapCommand;
+
+  @AfterEach
+  void clear() {
+    CommandExecutionContextHolder.clearCommandExecutionContext();
+  }
 
   @Test
   void shouldThrowInvalidCommandExceptionIfCommandLengthIsInvalid() {
@@ -89,7 +95,7 @@ class CalculatePortfolioOverlapCommandTest {
     List<Fund> availableFunds =
         DataFactory.getResource("available_funds.json", new TypeReference<List<Fund>>() {});
     List<Fund> userFunds =
-        DataFactory.getResource("user_funds.json", new TypeReference<List<Fund>>() {});
+        DataFactory.getResource("user_funds_axis_icici_uti.json", new TypeReference<List<Fund>>() {});
 
     CommandExecutionContextHolder.setCommandExecutionContext(
         new CommandExecutionContext(availableFunds));

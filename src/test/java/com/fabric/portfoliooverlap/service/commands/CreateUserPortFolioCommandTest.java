@@ -14,6 +14,7 @@ import com.fabric.portfoliooverlap.utility.DataFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.List;
 import net.javacrumbs.jsonunit.JsonAssert;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,6 +24,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class CreateUserPortFolioCommandTest {
 
   @InjectMocks private CreateUserPortFolioCommand createUserPortFolioCommand;
+
+  @AfterEach
+  void clear() {
+    CommandExecutionContextHolder.clearCommandExecutionContext();
+  }
 
   @Test
   void shouldThrowInvalidCommandExceptionIfCommandLengthIsInvalid() {
@@ -54,7 +60,7 @@ class CreateUserPortFolioCommandTest {
 
     List<Fund> actualUserFunds = commandExecutionContext.getUserFunds();
     List<Fund> expectedUserFunds =
-        DataFactory.getResource("user_funds.json", new TypeReference<List<Fund>>() {});
+        DataFactory.getResource("user_funds_axis_icici_uti.json", new TypeReference<List<Fund>>() {});
     assertJsonEquals(expectedUserFunds, actualUserFunds, JsonAssert.when(IGNORING_ARRAY_ORDER));
   }
 
@@ -72,7 +78,6 @@ class CreateUserPortFolioCommandTest {
         CommandExecutionContextHolder.getCommandExecutionContext();
 
     List<Fund> actualUserFunds = commandExecutionContext.getUserFunds();
-    DataFactory.getResource("user_funds1.json", new TypeReference<List<Fund>>() {});
     assertTrue(actualUserFunds.isEmpty());
   }
 
@@ -94,7 +99,7 @@ class CreateUserPortFolioCommandTest {
 
     List<Fund> actualUserFunds = commandExecutionContext.getUserFunds();
     List<Fund> expectedUserFunds =
-        DataFactory.getResource("user_funds1.json", new TypeReference<List<Fund>>() {});
+        DataFactory.getResource("user_funds_axis_bluechip_uti_index.json", new TypeReference<List<Fund>>() {});
     assertJsonEquals(expectedUserFunds, actualUserFunds, JsonAssert.when(IGNORING_ARRAY_ORDER));
   }
 }
